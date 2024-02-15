@@ -1,9 +1,13 @@
-import { ImageBackground, StyleSheet, Image, Text, View, useWindowDimensions } from 'react-native'
+import { ImageBackground, StyleSheet, Image, Text, View, useWindowDimensions, ScaledSize } from 'react-native'
 import React from 'react'
 import { Canvas, LinearGradient, Rect, vec } from '@shopify/react-native-skia'
 
 const HomeBackground = () => {
-  const {width, height} = useWindowDimensions()
+  const dimensions = useWindowDimensions()
+  const {width, height} = dimensions
+
+  const myStyles = styles(dimensions)
+
   return (
     <>
         <Canvas style={{flex:1}}>
@@ -19,12 +23,7 @@ const HomeBackground = () => {
             <Image 
                 source={require("../assets/home/House.png")}
                 resizeMode='cover' 
-                style={{
-                    width: width, 
-                    height: width,
-                    ...StyleSheet.absoluteFillObject,
-                    top: '36%',
-                }}
+                style={myStyles.houseImage}
             />
         </ImageBackground>
     </>
@@ -33,4 +32,13 @@ const HomeBackground = () => {
 
 export default HomeBackground
 
-const styles = StyleSheet.create({})
+const styles = ({width}: ScaledSize) => {
+    return StyleSheet.create({
+        houseImage: {
+            width: width, 
+            height: width,
+            ...StyleSheet.absoluteFillObject,
+            top: '36%',
+        }
+    })
+}
