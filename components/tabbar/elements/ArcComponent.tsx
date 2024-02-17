@@ -13,7 +13,8 @@ const ArcComponent = ({height,width}: ArcComponentProps) => {
   return (
     <Canvas
       style={{
-        height
+        height,
+        ...StyleSheet.absoluteFillObject,
       }}
     >
       <Path
@@ -22,7 +23,7 @@ const ArcComponent = ({height,width}: ArcComponentProps) => {
         <LinearGradient 
           start={vec(width/2,0)}
           end={vec(width/2,height)}
-          colors={["rgba(58,58,106,1)","rgba(37,36,76,1)"]}
+          colors={["rgba(58,58,106,0.26)","rgba(37,36,76,0.26)"]}
         />
       </Path>
       <Path
