@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import MapIcon from '../icons/MapIcon'
 import ListIcon from '../icons/ListIcon'
+import TrapezoidBackground from './TrapezoidBackground'
 
 const TabBarItems = () => {
   return (
@@ -15,6 +16,7 @@ const TabBarItems = () => {
         }}
         >
       <MapIcon />
+      <TrapezoidBackground />
       <ListIcon />
     </View>
   )
