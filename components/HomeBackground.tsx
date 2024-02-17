@@ -13,7 +13,9 @@ const HomeBackground = () => {
   const smokeOffsetY = height * 0.4
 
   return (
-    <>
+    <View style={{
+        ...StyleSheet.absoluteFillObject
+    }}>
         <Canvas style={{flex:1}}>
             <Rect x={0} y={0} width={width} height={height}>
                 <LinearGradient
@@ -23,8 +25,18 @@ const HomeBackground = () => {
                 />
             </Rect>
         </Canvas>
-        <ImageBackground source={require("../assets/home/Background.png")} resizeMode='cover' style={{height:"100%"}}>
-            <Canvas style={{height: smokeHeight, ...StyleSheet.absoluteFillObject, top: smokeOffsetY}}>
+        <ImageBackground 
+            source={require("../assets/home/Background.png")} 
+            resizeMode='cover' 
+            style={{height:"100%"}}
+        >
+            <Canvas 
+                style={{
+                    height: smokeHeight, 
+                    ...StyleSheet.absoluteFillObject, 
+                    top: smokeOffsetY
+                }}
+            >
                 <Rect x={0} y={0} width={width} height={smokeHeight}>
                     
                     <LinearGradient 
@@ -43,7 +55,7 @@ const HomeBackground = () => {
                 style={myStyles.houseImage}
             />
         </ImageBackground>
-    </>
+    </View>
   )
 }
 
