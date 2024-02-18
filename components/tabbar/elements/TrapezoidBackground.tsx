@@ -10,8 +10,8 @@ const TrapezoidBackground = () => {
             style={"fill"}
         >
             <LinearGradient 
-                start={vec(0,0)}
-                end={vec(0,100)}
+                start={vec(183,100)}
+                end={vec(183,0)}
                 colors={["rgba(62,63,116,1)", "rgba(38,44,81,1)"]}
             />
         </Path>
