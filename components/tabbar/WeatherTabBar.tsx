@@ -5,8 +5,8 @@ import useApplicationDimensions from '../../hooks/useApplicationDimensions'
 import TabBarItems from './elements/TabBarItems'
 
 const WeatherTabBar = () => {
-  const tabBarHeight = 88
   const {width, height} = useApplicationDimensions()
+  const tabBarHeight = height * 0.12
   return (
     <View 
         style={{
