@@ -13,9 +13,9 @@ const WeatherInfo = ({weather}:WeatherInfoProps) => {
   const weatherInfoMargin = top + 51
 
   return (
-    <View style={{backgroundColor:"red", marginTop: weatherInfoMargin}}>
+    <View style={{marginTop: weatherInfoMargin, alignItems: "center"}}>
       <Text style={styles.cityText}>{city}</Text>
-      <Text style={styles.temperatureText}>{temperature}</Text>
+      <Text style={styles.temperatureText}>{temperature}{DEGREE_SYMBOL}</Text>
       <Text style={styles.conditionText}>{condition}</Text>
       <Text style={styles.minMaxText}>H: {high}{DEGREE_SYMBOL}    L: {low}{DEGREE_SYMBOL}</Text>
     </View>
@@ -26,15 +26,27 @@ export default WeatherInfo
 
 const styles = StyleSheet.create({
     cityText: {
-
+        fontFamily: "SF-Semibold",
+        fontSize: 34,
+        color: "#FFF",
+        lineHeight: 41
     },
     temperatureText: {
-
+        fontFamily: "SF-Thin",
+        fontSize: 96,
+        color: "#FFF",
+        lineHeight: 96
     },
     conditionText: {
-
+        fontFamily: "SF-Semibold",
+        fontSize: 20,
+        lineHeight: 20,
+        color: "rgba(235,235,245,0.6)"
     },
     minMaxText: {
-
+        fontFamily: "SF-Semibold",
+        fontSize: 20,
+        lineHeight: 20,
+        color: "#FFF"
     }
 })
