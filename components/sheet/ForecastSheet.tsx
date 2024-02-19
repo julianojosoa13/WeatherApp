@@ -6,7 +6,7 @@ import useApplicationDimensions from '../../hooks/useApplicationDimensions'
 import ForecastControl from './elements/ForecastControl'
 import Separator from './elements/Separator'
 import ForecastCapsule from '../forecast/ForecastCapsule'
-import { ForecastList } from '../../data/ForecastData'
+import { ForecastList, hourly } from '../../data/ForecastData'
 
 const ForecastSheet = () => {
   const snapPoints = ["38.5%","83%"]
@@ -16,6 +16,7 @@ const ForecastSheet = () => {
   const capsuleRadius = 30
   const capsuleHeight = height * 0.17
   const capsuleWidth = width * 0.15
+
   return (
     <BottomSheet
       snapPoints={snapPoints}
@@ -31,7 +32,7 @@ const ForecastSheet = () => {
       <>
         <ForecastControl />
         <Separator width={width} height={3}/>
-        <ForecastCapsule width={capsuleWidth} height={capsuleHeight} radius={capsuleRadius} forecast={ForecastList[0]} />
+        <ForecastCapsule width={capsuleWidth} height={capsuleHeight} radius={capsuleRadius} forecast={ hourly[0]} />
       </>
     </BottomSheet>
   )
