@@ -39,7 +39,7 @@ const ForecastSheet = () => {
       handleIndicatorStyle={{
         width: 48,
         height: 5,
-        backgroundColor: "rgba(0,0,0,0.3)"
+        backgroundColor: "rgba(255,255,255,0.6)"
       }}
       backgroundComponent={() => (
         <ForecastSheetBackground width={width} height={firstSnapPoint} cornerRadius={cornerRadius}/>
