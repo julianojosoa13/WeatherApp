@@ -14,5 +14,5 @@ export const convertDateTo12HrFormat = (date: Date): string => {
 export const getDayOfWeek = (date: Date) : [string,boolean] => {
     const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
     let today = new Date().getDate() === date.getDate()
-    return [days[new Date().getDay()],today]
+    return [days[date.getDay()],today]
 }

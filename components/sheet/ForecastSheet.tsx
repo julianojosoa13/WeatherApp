@@ -8,6 +8,16 @@ import Separator from './elements/Separator'
 import {hourly, weekly } from '../../data/ForecastData'
 import ForecastScroll from '../forecast/ForecastScroll'
 import { ForecastType } from '../../models/Weather'
+import AirQualityWidget from '../forecast/widgets/AirQualityWidget'
+import UvIndexWidget from '../forecast/widgets/UvIndexWidget'
+import WindWidget from '../forecast/widgets/WindWidget'
+import SunriseWidget from '../forecast/widgets/SunriseWidget'
+import RainFallWidget from '../forecast/widgets/RainFallWidget'
+import FeelsLikeWidget from '../forecast/widgets/FeelsLikeWidget'
+import HumidityWidget from '../forecast/widgets/HumidityWidget'
+import VisibilityWidget from '../forecast/widgets/VisibilityWidget'
+import PressureWidget from '../forecast/widgets/PressureWidget'
+import { ScrollView } from 'react-native-gesture-handler'
 
 const ForecastSheet = () => {
   const snapPoints = ["38.5%","83%"]
@@ -17,6 +27,8 @@ const ForecastSheet = () => {
   const capsuleRadius = 30
   const capsuleHeight = height * 0.17
   const capsuleWidth = width * 0.15
+
+  const smallWidgetSize = width/2 - 20
   
   const [selectedForecastType, setSelectedForecastType] = useState(ForecastType.Hourly)
   const forecasts = selectedForecastType === ForecastType.Hourly ? hourly:weekly
@@ -36,11 +48,44 @@ const ForecastSheet = () => {
       <>
         <ForecastControl onPress={(type) => setSelectedForecastType(type)}/>
         <Separator width={width} height={3}/>
-        <ForecastScroll 
-          capsuleWidth={capsuleWidth} 
-          capsuleHeight={capsuleHeight} 
-          capsuleRadius={capsuleRadius} 
-          forecasts={forecasts} />
+        <ScrollView
+          style={{
+            flex:1,
+          }}
+          contentContainerStyle={{
+            paddingBottom: 10,
+          }}
+        >
+          <ForecastScroll 
+            capsuleWidth={capsuleWidth} 
+            capsuleHeight={capsuleHeight} 
+            capsuleRadius={capsuleRadius} 
+            forecasts={forecasts} 
+          />
+          <View
+            style={{flex:1,paddingTop:30,paddingBottom: 50}}
+          >
+            <AirQualityWidget width={width - 30} height={150} />
+            <View
+              style={{
+                flexDirection: "row",
+                flexWrap: "wrap",
+                justifyContent: "center",
+                padding:15,
+                gap:10,
+              }}
+            >
+              <UvIndexWidget width={smallWidgetSize} height={smallWidgetSize} />
+              <WindWidget width={smallWidgetSize} height={smallWidgetSize}/>
+              <SunriseWidget width={smallWidgetSize} height={smallWidgetSize}/>
+              <RainFallWidget width={smallWidgetSize} height={smallWidgetSize}/>
+              <FeelsLikeWidget width={smallWidgetSize} height={smallWidgetSize}/>
+              <HumidityWidget width={smallWidgetSize} height={smallWidgetSize}/>
+              <VisibilityWidget width={smallWidgetSize} height={smallWidgetSize}/>
+              <PressureWidget width={smallWidgetSize} height={smallWidgetSize}/>
+            </View>
+          </View>
+        </ScrollView>
       </>
     </BottomSheet>
   )
