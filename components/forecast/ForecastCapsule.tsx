@@ -16,6 +16,7 @@ const ForecastCapsule = ({forecast,width,height,radius}: ForecastCapsuleProps) =
   const {date, icon, probability, temperature} = forecast
   const timeToDisplay = convertDateTo12HrFormat(date)
   const capsuleOpacity = timeToDisplay.toLowerCase() == "now"? 1:0.3
+  const propabilityOpacity = probability > 0? 1:0
   return (
     <View
         style={{
@@ -51,7 +52,7 @@ const ForecastCapsule = ({forecast,width,height,radius}: ForecastCapsuleProps) =
         <Text style={styles.time}>{timeToDisplay.toString()}</Text>
         <View>
           <Image source={icon} style={{width:width/2,height: width/2}} />
-          <Text style={styles.probability}>{probability}%</Text>
+          <Text style={[styles.probability, {opacity: propabilityOpacity}]}>{probability}%</Text>
         </View>
         <Text style={styles.temperature}>{temperature}{DEGREE_SYMBOL}</Text>
       </View>
