@@ -15,7 +15,7 @@ interface ForecastCapsuleProps {
 const ForecastCapsule = ({forecast,width,height,radius}: ForecastCapsuleProps) => {
   const {date, icon, probability, temperature} = forecast
   const timeToDisplay = convertDateTo12HrFormat(date)
-
+  const capsuleOpacity = timeToDisplay.toLowerCase() == "now"? 1:0.3
   return (
     <View
         style={{
@@ -35,7 +35,7 @@ const ForecastCapsule = ({forecast,width,height,radius}: ForecastCapsuleProps) =
             width={width}
             height={height}
             r={radius}
-            color={"rgba(72,49,157,1)"}
+            color={`rgba(72,49,157,${capsuleOpacity})`}
         >
           <Shadow dx={1} dy={1} blur={0} color={"rgba(255,255,255,0.25)"} inner/>
         </RoundedRect>
