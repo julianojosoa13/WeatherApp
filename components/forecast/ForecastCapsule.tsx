@@ -20,7 +20,7 @@ const ForecastCapsule = ({forecast,width,height,radius}: ForecastCapsuleProps) =
     let timeOrDay = ""
     if(type===ForecastType.Hourly) {
       timeOrDay = convertDateTo12HrFormat(date)
-      opacity = timeOrDay.toLowerCase() == "now"? 1:0.3
+      opacity = timeOrDay.toLowerCase() == "now"? 1:0.5
     } else {
       const [dayOfWeek,isToday] = getDayOfWeek(date)
       timeOrDay = dayOfWeek

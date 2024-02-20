@@ -23,7 +23,7 @@ const ArcComponent = ({height,width}: ArcComponentProps) => {
         <LinearGradient 
           start={vec(width/2,0)}
           end={vec(width/2,height)}
-          colors={["rgba(58,58,106,0.26)","rgba(37,36,76,0.26)"]}
+          colors={["rgba(58,58,106,0.8)","rgba(37,36,76,0.4)"]}
         />
       </Path>
       <Path

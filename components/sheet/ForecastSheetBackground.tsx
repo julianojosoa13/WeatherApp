@@ -29,7 +29,7 @@ const ForecastSheetBackground = ({width,height,cornerRadius}:ForecastSheetBackgr
             <LinearGradient
                 start={vec(0,0)}
                 end={vec(width,height)}
-                colors={["rgba(46,51,90,0.26)","rgba(28,57,51,0.26)"]}
+                colors={["rgba(46,51,90,0.46)","rgba(28,57,51,0.46)"]}
                 positions={[-0.04,0.95]}
             />
             
