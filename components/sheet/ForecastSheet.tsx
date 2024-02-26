@@ -18,11 +18,17 @@ import HumidityWidget from '../forecast/widgets/HumidityWidget'
 import VisibilityWidget from '../forecast/widgets/VisibilityWidget'
 import PressureWidget from '../forecast/widgets/PressureWidget'
 import { ScrollView } from 'react-native-gesture-handler'
+import { useAnimatedReaction, useSharedValue } from 'react-native-reanimated'
 
 const ForecastSheet = () => {
   const snapPoints = ["38.5%","83%"]
   const {width,height} = useApplicationDimensions()
   const firstSnapPoint = height * (parseFloat(snapPoints[0])/100)
+  const secondSnapPoint = height * (parseFloat(snapPoints[1])/100)
+
+  const minY = height - secondSnapPoint
+  const maxY = height - firstSnapPoint
+
   const cornerRadius = 44
   const capsuleRadius = 30
   const capsuleHeight = height * 0.17
@@ -32,6 +38,19 @@ const ForecastSheet = () => {
   
   const [selectedForecastType, setSelectedForecastType] = useState(ForecastType.Hourly)
   const forecasts = selectedForecastType === ForecastType.Hourly ? hourly:weekly
+
+  const currentPosition = useSharedValue(0)
+
+  const normalizePosition = (position: number)=> {
+    "worklet"
+    return ((position - maxY) / (maxY - minY) * -1)
+  }
+
+  useAnimatedReaction(() => {
+    return currentPosition.value
+  }, (cv) => {
+    console.log(normalizePosition(cv))
+  })
 
   return (
     <BottomSheet
@@ -44,6 +63,8 @@ const ForecastSheet = () => {
       backgroundComponent={() => (
         <ForecastSheetBackground width={width} height={firstSnapPoint} cornerRadius={cornerRadius}/>
       )}
+      animatedPosition={currentPosition}
+      animateOnMount={false}
     > 
       <>
         <ForecastControl onPress={(type) => setSelectedForecastType(type)}/>
