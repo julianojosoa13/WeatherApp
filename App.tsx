@@ -5,6 +5,7 @@ import { useFonts } from 'expo-font';
 import { useCallback } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Home from './screens/Home';
+import BasicAnimations from './screens/BasicAnimations';
 
 SplashScreen.preventAutoHideAsync()
 
@@ -26,7 +27,7 @@ export default function App() {
   return (
     <SafeAreaProvider onLayout={onLayoutRootView}>
       <GestureHandlerRootView style={{flex: 1}}>
-        <Home />
+        <BasicAnimations />
         <StatusBar style='light'/>
       </GestureHandlerRootView>
     </SafeAreaProvider>
