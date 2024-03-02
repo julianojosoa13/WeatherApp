@@ -18,11 +18,11 @@ export const ForecastSheetProvider = ({children}: forecastSheetProviderProps) =>
     )
 }
 
-const useForecastSheetProvider = ()<SharedValue<number>> => {
+export const useForecastSheetPosition = (): SharedValue<number> => {
     const context = useContext(ForecastSheetContext)
-    if (context === null) => {
+    if (context === null) {
         throw new Error("useForecastSheetPosition must be within the ForecastSheet Provider")
     }
 
-    return context
+    return context 
 }

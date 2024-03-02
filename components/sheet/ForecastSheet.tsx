@@ -19,10 +19,13 @@ import VisibilityWidget from '../forecast/widgets/VisibilityWidget'
 import PressureWidget from '../forecast/widgets/PressureWidget'
 import { ScrollView } from 'react-native-gesture-handler'
 import { useAnimatedReaction, useSharedValue } from 'react-native-reanimated'
+import { useForecastSheetPosition } from '../../context/ForecastSheetContext'
 
 const ForecastSheet = () => {
   const snapPoints = ["38.5%","83%"]
   const {width,height} = useApplicationDimensions()
+  const animatedPosition = useForecastSheetPosition()
+
   const firstSnapPoint = height * (parseFloat(snapPoints[0])/100)
   const secondSnapPoint = height * (parseFloat(snapPoints[1])/100)
 
