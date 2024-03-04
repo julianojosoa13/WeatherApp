@@ -52,7 +52,7 @@ const ForecastSheet = () => {
   useAnimatedReaction(() => {
     return currentPosition.value
   }, (cv) => {
-    console.log(normalizePosition(cv))
+    animatedPosition.value = normalizePosition(cv)
   })
 
   return (

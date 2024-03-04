@@ -2,6 +2,8 @@ import { ImageBackground, StyleSheet, Image, Text, View, useWindowDimensions, Sc
 import React from 'react'
 import { Canvas, Line, LinearGradient, Rect, vec } from '@shopify/react-native-skia'
 import useApplicationDimensions from '../hooks/useApplicationDimensions'
+import { useForecastSheetPosition } from '../context/ForecastSheetContext'
+import { useAnimatedReaction } from 'react-native-reanimated'
 
 const HomeBackground = () => {
   const dimensions = useApplicationDimensions()
@@ -11,6 +13,15 @@ const HomeBackground = () => {
 
   const smokeHeight = height * 0.6
   const smokeOffsetY = height * 0.4
+
+  const animatedPosition = useForecastSheetPosition()
+
+
+  useAnimatedReaction(()=>{
+    return animatedPosition.value
+  }, (cv) => {
+    console.log(cv)
+  })
 
   return (
     <View style={{
