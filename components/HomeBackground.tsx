@@ -1,9 +1,9 @@
-import { ImageBackground, StyleSheet, Image, Text, View, useWindowDimensions, ScaledSize } from 'react-native'
+import { ImageBackground, StyleSheet, Image, Text, View, useWindowDimensions, ScaledSize, Platform } from 'react-native'
 import React from 'react'
 import { Canvas, Line, LinearGradient, Rect, vec } from '@shopify/react-native-skia'
 import useApplicationDimensions from '../hooks/useApplicationDimensions'
 import { useForecastSheetPosition } from '../context/ForecastSheetContext'
-import Animated, { interpolate, useAnimatedReaction, useAnimatedStyle } from 'react-native-reanimated'
+import Animated, { Extrapolate, Extrapolation, interpolate, interpolateColor, useAnimatedReaction, useAnimatedStyle, useDerivedValue, useSharedValue } from 'react-native-reanimated'
 
 const HomeBackground = () => {
   const dimensions = useApplicationDimensions()
@@ -18,43 +18,63 @@ const HomeBackground = () => {
   const AnimatedImgBg = Animated.createAnimatedComponent(ImageBackground)
   const AnimatedCanvas = Animated.createAnimatedComponent(Canvas)
 
-  const AnimatedBgStyle = useAnimatedStyle(()=>{
+  const leftBgColor = useSharedValue("#2E335A")
+  const rightBgColor = useSharedValue("#1C1B33")
+
+  const bgColors = useDerivedValue(() => {
+    if( Platform.OS === "ios") {
+        leftBgColor.value = interpolateColor(animatedPosition.value, [0,1], ["#2E335A", "#422E5A"])
+    } else {
+        leftBgColor.value = animatedPosition.value > 0.5? "#422E5A" : "#2E335A"
+    }
+    return [leftBgColor.value, rightBgColor.value]
+  })
+
+  const animatedBgStyle = useAnimatedStyle(()=>{
     return {
-        transform: [{translateY: interpolate(animatedPosition.value, [0,1], [0, -height])}]
+        transform: [{translateY: interpolate(animatedPosition.value, [0,1], [0, -height], Extrapolation.CLAMP)}]
     }
   })
 
+  const animatedCanvasSmokeStyle = useAnimatedStyle(()=>{
+    return {
+        opacity: interpolate(animatedPosition.value, [0,0.1], [1,0])
+    }
+  })
 
   useAnimatedReaction(()=>{
     return animatedPosition.value
   }, (cv) => {
-    console.log(cv)
+    // console.log(cv)
   })
 
   return (
     <View style={{
         ...StyleSheet.absoluteFillObject
     }}>
-        <Canvas style={{flex:1}}>
+        <Canvas style={{ ...StyleSheet.absoluteFillObject}}>
             <Rect x={0} y={0} width={width} height={height}>
                 <LinearGradient
                     start={vec(0,0)}
                     end={vec(width, height)}
-                    colors={["#2E335A","#1C1B33"]}
+                    colors={bgColors}
                 />
             </Rect>
         </Canvas>
         <AnimatedImgBg 
             source={require("../assets/home/Background.png")} 
             resizeMode='cover' 
-            style={[{height:"100%"}, AnimatedBgStyle]}
+            style={[{height:"100%"},animatedBgStyle]}
         >
             <AnimatedCanvas 
-                style={{
-                    height: smokeHeight, 
-                    ...StyleSheet.absoluteFillObject, 
-                    top: smokeOffsetY
-                }}
+                style={[
+                    {
+                        height: smokeHeight, 
+                        ...StyleSheet.absoluteFillObject, 
+                        top: smokeOffsetY
+                    },
+                    animatedCanvasSmokeStyle
+                ]}
             >
                 <Rect x={0} y={0} width={width} height={smokeHeight}>
                     
