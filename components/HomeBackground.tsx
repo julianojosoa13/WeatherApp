@@ -3,7 +3,7 @@ import React from 'react'
 import { Canvas, Line, LinearGradient, Rect, vec } from '@shopify/react-native-skia'
 import useApplicationDimensions from '../hooks/useApplicationDimensions'
 import { useForecastSheetPosition } from '../context/ForecastSheetContext'
-import { useAnimatedReaction } from 'react-native-reanimated'
+import Animated, { interpolate, useAnimatedReaction, useAnimatedStyle } from 'react-native-reanimated'
 
 const HomeBackground = () => {
   const dimensions = useApplicationDimensions()
@@ -15,6 +15,14 @@ const HomeBackground = () => {
   const smokeOffsetY = height * 0.4
 
   const animatedPosition = useForecastSheetPosition()
+  const AnimatedImgBg = Animated.createAnimatedComponent(ImageBackground)
+  const AnimatedCanvas = Animated.createAnimatedComponent(Canvas)
+
+  const AnimatedBgStyle = useAnimatedStyle(()=>{
+    return {
+        transform: [{translateY: interpolate(animatedPosition.value, [0,1], [0, -height])}]
+    }
+  })
 
 
   useAnimatedReaction(()=>{
@@ -36,12 +44,12 @@ const HomeBackground = () => {
                 />
             </Rect>
         </Canvas>
-        <ImageBackground 
+        <AnimatedImgBg 
             source={require("../assets/home/Background.png")} 
             resizeMode='cover' 
-            style={{height:"100%"}}
+            style={[{height:"100%"}, AnimatedBgStyle]}
         >
-            <Canvas 
+            <AnimatedCanvas 
                 style={{
                     height: smokeHeight, 
                     ...StyleSheet.absoluteFillObject, 
@@ -58,14 +66,14 @@ const HomeBackground = () => {
                     />
                     
                 </Rect>
-            </Canvas>
+            </AnimatedCanvas>
             
             <Image 
                 source={require("../assets/home/House.png")}
                 resizeMode='cover' 
                 style={myStyles.houseImage}
             />
-        </ImageBackground>
+        </AnimatedImgBg>
     </View>
   )
 }
