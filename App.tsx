@@ -11,6 +11,7 @@ SplashScreen.preventAutoHideAsync()
 
 export default function App() {
   const [fontsLoaded] = useFonts({
+    "Pacifico-Regular": require("./assets/fonts/Pacifico-Regular.ttf"),
     "SF-Thin": require("./assets/fonts/SF-Pro-Display-Thin.otf"),
     "SF-Regular": require("./assets/fonts/SF-Pro-Display-Regular.otf"), 
     "SF-Semibold": require("./assets/fonts/SF-Pro-Display-Semibold.otf") 
