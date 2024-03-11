@@ -5,8 +5,11 @@ import ListIcon from '../icons/ListIcon'
 import TrapezoidBackground from './TrapezoidBackground'
 import useApplicationDimensions from '../../../hooks/useApplicationDimensions'
 import CircleButton from './CircleButton'
+import { ParamListBase, useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
 
 const TabBarItems = () => {
+  const navigation = useNavigation<StackNavigationProp<ParamListBase>>()
   const {width, height} = useApplicationDimensions()
   const trapezoidWidth = width * 0.68
   const trapezoidHeight = height * 0.12
