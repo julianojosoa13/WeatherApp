@@ -43,7 +43,12 @@ const TabBarItems = () => {
           }
         }
       </Pressable>
-      <ListIcon />
+      <Pressable
+        onPress={() =>  navigation.navigate("List")}
+        hitSlop={10}
+      >
+        <ListIcon />
+      </Pressable>
     </View>
   )
 }
