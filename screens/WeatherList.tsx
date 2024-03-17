@@ -6,6 +6,7 @@ import {Ionicons,Feather} from "@expo/vector-icons"
 import { ParamListBase, useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { Canvas, LinearGradient, RoundedRect, Shadow, vec } from '@shopify/react-native-skia'
+import WeatherWidget from '../components/WeatherWidget'
 
 
 const WeatherList = () => {
@@ -79,6 +80,11 @@ const WeatherList = () => {
                     style={styles.searchInput}
                 />
             </View>
+        </View>
+        <View
+            style={{flex:1}}
+        >
+            <WeatherWidget  />
         </View>
       </View>
     </>
