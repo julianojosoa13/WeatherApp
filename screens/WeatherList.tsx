@@ -85,6 +85,9 @@ const WeatherList = () => {
             style={{flex:1}}
         >
             <WeatherWidget  />
+            <WeatherWidget  />
+            <WeatherWidget  />
+            <WeatherWidget  />
         </View>
       </View>
     </>
