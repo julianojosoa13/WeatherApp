@@ -3,9 +3,14 @@ import React from 'react'
 import useApplicationDimensions from '../hooks/useApplicationDimensions'
 import { Canvas, FitBox, LinearGradient, Path, Skia, rect, usePathInterpolation, vec } from '@shopify/react-native-skia'
 import { useSharedValue, withTiming } from 'react-native-reanimated'
+import { Forecast } from '../models/Weather'
 
-const WeatherWidget = () => {
+interface WeatherWidgetProps {
+  forecast: Forecast
+}
 
+const WeatherWidget = ({forecast}:WeatherWidgetProps) => {
+  const {temperature, high, low, location, icon, weather} = forecast
   const {width} = useApplicationDimensions()
   const widgetWidth = width * 0.875
   const widgetHeight = widgetWidth / 1.95
@@ -48,8 +53,12 @@ const WeatherWidget = () => {
             />
           </Path>
         </FitBox>
-
       </Canvas>
+      <View 
+        style={{flex:1}}
+      >
+
+      </View>
     </Pressable>
   )
 }

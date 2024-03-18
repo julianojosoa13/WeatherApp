@@ -7,6 +7,7 @@ import { ParamListBase, useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { Canvas, LinearGradient, RoundedRect, Shadow, vec } from '@shopify/react-native-skia'
 import WeatherWidget from '../components/WeatherWidget'
+import { ForecastList } from '../data/ForecastData'
 
 
 const WeatherList = () => {
@@ -84,10 +85,7 @@ const WeatherList = () => {
         <View
             style={{flex:1}}
         >
-            <WeatherWidget  />
-            <WeatherWidget  />
-            <WeatherWidget  />
-            <WeatherWidget  />
+            <WeatherWidget  forecast={ForecastList[0]}/>
         </View>
       </View>
     </>
