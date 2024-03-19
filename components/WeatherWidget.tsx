@@ -2,7 +2,7 @@ import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import useApplicationDimensions from '../hooks/useApplicationDimensions'
 import { Canvas, FitBox, LinearGradient, Path, Skia, rect, usePathInterpolation, vec } from '@shopify/react-native-skia'
-import { useSharedValue, withTiming } from 'react-native-reanimated'
+import Animated, { interpolate, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
 import { Forecast, WeatherType } from '../models/Weather'
 import { DEGREE_SYMBOL } from '../utils/Constants'
 
@@ -21,6 +21,12 @@ const WeatherWidget = ({forecast}:WeatherWidgetProps) => {
   
   const progress = useSharedValue(0)
   const path = usePathInterpolation(progress, [0,1], [initialPath!, skewedPath!])
+
+  const animatedImageStyles = useAnimatedStyle(()=>{
+    return {
+      transform: [{rotate: `${interpolate(progress.value, [0,1], [0,-2])}deg`}]
+    }
+  })
 
   const onPress= ()=>{
     const status = progress.value === 1? 0:1
@@ -64,7 +70,19 @@ const WeatherWidget = ({forecast}:WeatherWidgetProps) => {
         }}
       >
         <Text style={styles.temperatureText}>{temperature} {DEGREE_SYMBOL}</Text>
-        <Image source={icon} style={{width:160,height:160, ...StyleSheet.absoluteFillObject, left: widgetWidth - 160, top: -30}}/>
+        <Animated.Image 
+          source={icon} 
+          style={[
+            {
+              width:160,
+              height:160, 
+              ...StyleSheet.absoluteFillObject, 
+              left: widgetWidth - 160, 
+              top: -30
+            },
+            animatedImageStyles
+          ]}
+        />
         <View
           style={{
             paddingTop: 10,

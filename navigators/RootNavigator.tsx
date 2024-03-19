@@ -13,8 +13,8 @@ const RootNavigator = () => {
             headerShown: false,
         }}
     >
-      <Stack.Screen name="List" component={WeatherList} />
       <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="List" component={WeatherList} />
     </Stack.Navigator>
   )
 }
