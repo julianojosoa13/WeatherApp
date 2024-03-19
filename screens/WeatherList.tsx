@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, TextInput, View, useWindowDimensions } from 'react-native'
+import { Pressable, StyleSheet, Text, TextInput, View, useWindowDimensions, ScrollView } from 'react-native'
 import React from 'react'
 import BackgroundGradient from '../components/BackgroundGradient'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -82,11 +82,20 @@ const WeatherList = () => {
                 />
             </View>
         </View>
-        <View
-            style={{flex:1}}
+        <ScrollView
+            style={{flex:1, paddingTop: 20}}
+            contentContainerStyle={{
+                alignItems: "center",
+                gap: 20,
+                paddingBottom: 100
+            }}
         >
-            <WeatherWidget  forecast={ForecastList[0]}/>
-        </View>
+            {ForecastList.map((item,index)=>{
+                return (
+                    <WeatherWidget key={index}  forecast={item}/>
+                )
+            })}
+        </ScrollView>
       </View>
     </>
   )
