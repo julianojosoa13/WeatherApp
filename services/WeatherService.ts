@@ -17,9 +17,10 @@ export class WeatherService {
   private state:string="";
   private API_KEY: string = process.env.API_KEY!;
   constructor(lat: number, lng: number) {
-  
+    
     this.baseUrl = `https://api.tomorrow.io/v4/weather/forecast?apikey=${this.API_KEY}&location=${lat},${lng}&units=imperial&timesteps=1d&timesteps=1h`;
     this.nwsUrl = `https://api.weather.gov/points/${lat},${lng}`;
+    console.log(this.API_KEY,this.baseUrl,this.nwsUrl)
   }
   
   public async FetchAll():Promise<WeatherData> {
