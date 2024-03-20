@@ -5,13 +5,13 @@ import { DEGREE_SYMBOL } from '../../utils/Constants'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import Animated, { Extrapolation, interpolate, interpolateColor, useAnimatedStyle } from 'react-native-reanimated'
 import { useForecastSheetPosition } from '../../context/ForecastSheetContext'
+import { useWeatherData } from '../../context/WeatherDataContext'
 
-interface WeatherInfoProps {
-    weather: Weather
-}
-const WeatherInfo = ({weather}:WeatherInfoProps) => {
+
+const WeatherInfo = () => {
+  const {weatherData} = useWeatherData()
   const topMargin = 51
-  const {city, high, low, temperature, condition} = weather
+  const {currentWeather: {city, high, low, temperature, condition}} = weatherData
   const {top} = useSafeAreaInsets()
   const weatherInfoMargin = top + topMargin
 

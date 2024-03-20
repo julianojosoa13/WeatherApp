@@ -20,11 +20,14 @@ import PressureWidget from '../forecast/widgets/PressureWidget'
 import { ScrollView } from 'react-native-gesture-handler'
 import Animated, { useAnimatedReaction, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
 import { useForecastSheetPosition } from '../../context/ForecastSheetContext'
+import { useWeatherData } from '../../context/WeatherDataContext'
 
 const ForecastSheet = () => {
   const snapPoints = ["38.5%","83%"]
   const {width,height} = useApplicationDimensions()
   const animatedPosition = useForecastSheetPosition()
+
+  const {weatherData:{hourlyForecast, weeklyForecast}} = useWeatherData()
 
   const firstSnapPoint = height * (parseFloat(snapPoints[0])/100)
   const secondSnapPoint = height * (parseFloat(snapPoints[1])/100)
@@ -111,7 +114,7 @@ const ForecastSheet = () => {
                 capsuleWidth={capsuleWidth} 
                 capsuleHeight={capsuleHeight} 
                 capsuleRadius={capsuleRadius} 
-                forecasts={forecasts} 
+                forecasts={hourlyForecast} 
               />
             </Animated.View>
             <Animated.View style={[animatedWeeklyStyles]}>
@@ -119,7 +122,7 @@ const ForecastSheet = () => {
                 capsuleWidth={capsuleWidth} 
                 capsuleHeight={capsuleHeight} 
                 capsuleRadius={capsuleRadius} 
-                forecasts={forecasts} 
+                forecasts={weeklyForecast} 
               />
             </Animated.View>
             </View>

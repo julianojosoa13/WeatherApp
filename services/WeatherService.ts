@@ -8,14 +8,14 @@ import { Forecast, ForecastType, Weather, WeatherData, WeatherPointResponse, Wea
  * demo up and running.   
  */
 
-import {API_KEY} from "@env"
+// import {API_KEY} from "@env"
 
 export class WeatherService {
   private baseUrl: string;
   private nwsUrl: string;
   private city: string="";
   private state:string="";
-  private API_KEY: string = API_KEY;
+  private API_KEY: string = process.env.API_KEY!;
   constructor(lat: number, lng: number) {
   
     this.baseUrl = `https://api.tomorrow.io/v4/weather/forecast?apikey=${this.API_KEY}&location=${lat},${lng}&units=imperial&timesteps=1d&timesteps=1h`;

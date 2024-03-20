@@ -25,7 +25,9 @@ const TabBarItems = () => {
             paddingHorizontal: 32,
         }}
         >
-      <MapIcon />
+      <Pressable>
+        <MapIcon />
+      </Pressable>
       <TrapezoidBackground width={trapezoidWidth} height={trapezoidHeight} />
       <Pressable 
         style={{
